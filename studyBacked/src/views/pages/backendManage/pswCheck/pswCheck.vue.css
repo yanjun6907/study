@@ -1,0 +1,36 @@
+.mainCheck {
+    position: relative;
+    margin: 0;
+    box-shadow: 0 0 10px #000!important;
+    border-radius: 5px;
+    height: 500px;
+}
+.increaseTitle {
+    font-size: 18px;
+    font-weight: 200;
+    color: #000;
+    padding: 12px;
+    box-shadow: 0 0 10px #000!important;
+    border-radius: 5px;
+}
+.mainCenter {
+    position: absolute;
+    left: 50%;
+    transform: translate(-65%,30%);
+}
+.ruleWidth {
+    width: 400px;
+}
+.mainCenter label {
+    font-size: 16px;
+    color: #000;
+}
+.el-button {
+    margin: 0;
+}
+.el-form-item__error {
+    padding: 0;
+}
+.demo-ruleForm  {
+    margin-left: 85px!important;
+}

@@ -1,0 +1,29 @@
+.menu-top {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 25px;
+    box-shadow: 0 0 10px #000!important;
+    border-radius: 8px;
+}
+.meuBottom {
+    margin:0 0 25px;
+    box-shadow: 0 0 10px #000!important;
+    padding: 0 25px 15px;
+    border-radius: 8px;
+}
+.listTitle {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    padding:0 0 15px;
+  
+}
+.manage label {
+    margin: 0!important;
+}
+.el-form, .demo-ruleForm {
+    padding: 0;
+}

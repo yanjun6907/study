@@ -1,0 +1,49 @@
+.meu-Top {
+    padding: 25px 25px 0;
+    box-shadow: 0 0 10px #000!important;
+    border-radius: 8px;
+}
+.meuBottomList {
+    margin: 25px 0;
+    box-shadow: 0 0 10px #000!important;
+    padding: 15px 25px;
+    border-radius: 8px;
+}
+.lst-title {
+    font-size: 18px;
+    padding:0 0 15px;
+}
+.meu-Top label {
+    font-size:14px;
+    color: #000;
+    flex: 1;
+    margin:0 0 20px;
+}
+.detail-menu {
+    display: flex;
+    flex-direction: row;
+}
+.menu-lf {
+    flex: 1;
+    margin-right: 20px;
+}
+.menu-lf p {
+    width: 300px;
+    margin: 10px 0;
+    text-align: right;
+}
+.menu-rgt {
+    position: relative;
+    width: 100%;
+    margin:  0 auto;
+}
+.menu-rgt img,.menu-rgt i {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,30%);
+    width: 150px;
+    height: 150px;
+}
+.el-button {
+    margin-right: 0;
+}

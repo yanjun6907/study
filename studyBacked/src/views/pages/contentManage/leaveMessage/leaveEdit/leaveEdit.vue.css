@@ -1,0 +1,80 @@
+.menu-top {
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 25px;
+    box-shadow: 0 0 10px #000!important;
+    border-radius: 8px;
+}
+.meu-bottom,.meu-top {
+    margin:0 0 25px;
+    box-shadow: 0 0 10px #000!important;
+    padding: 0 25px 15px;
+    border-radius: 8px;
+}
+.list-title {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    padding:0 0 15px;
+  
+}
+.el-table th>.cell {
+    font-size: 14px;
+    font-weight: 400!important;
+    color: #000!important;
+}
+.manage label {
+    margin: 0!important;
+}
+.el-form, .demo-ruleForm {
+    padding: 0;
+}
+.mainContent {
+    width: 100%;
+    font-size: 15px;
+    letter-spacing:3px;
+    color: #000!important;
+    border: 1px solid #727272;
+}
+.mainContent p {
+    font-size: 18px;
+    padding: 10px;
+    border-bottom: 1px solid #727272;
+}
+.userInfo {
+    padding: 10px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    border-bottom: 1px solid #727272;
+}
+.userName {
+    padding-left: 10px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.mainTitle {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+}
+.mainTitle span {
+    flex: 1;
+}
+.el-table .cell.el-tooltip {
+    width: 300px!important;
+}
+.image {
+    margin: 15px auto;
+    text-align: center;
+}
+.image img {
+    width:250px;
+    height:200px;
+    border: 10px solid #e0e0e0;
+}

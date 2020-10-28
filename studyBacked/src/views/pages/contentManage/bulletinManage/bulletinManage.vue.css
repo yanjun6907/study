@@ -1,0 +1,35 @@
+.manage-top {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    box-shadow: 0 0 10px #000!important;
+    border-radius: 8px;
+}
+.topTitle {
+    display: flex;
+    align-items: center; 
+    font-size: 16px; 
+    padding: 25px 25px 25px 50px; 
+    border-top: 1px solid rgba(0, 0, 0, 0.3);  
+}
+.meu-bottom {
+    margin: 25px 0;
+    box-shadow: 0 0 10px #000!important;
+    padding: 0 25px 15px;
+    border-radius: 8px;
+}
+.list-title {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    padding:0 0 15px;
+  
+}
+
+.manage label {
+    margin: 0!important;
+}
+.el-form, .demo-ruleForm {
+    padding: 0;
+}
