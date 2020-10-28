@@ -1,0 +1,37 @@
+.main {
+  margin: 10rpx auto;
+  width: 90%;
+  border: 1px solid rgb(221, 221, 221);
+}
+.weui-cells {
+  margin-top: 0;
+  background-color: var(--weui-BG-2);
+  line-height: 1.2;
+  font-size: 32rpx;
+  overflow: hidden;
+  position: relative;
+}
+.bottom {
+  margin-top: 50rpx;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+}
+.btn1,.btn2 {
+  width: 45%;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 35rpx;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn1 {
+  color: rgb(3, 154, 255);
+  background-color: #fff;
+  border: 1px solid rgb(3, 154, 255);
+}
+.btn2 {
+  color: #fff;
+  background-color: rgb(3, 154, 255);
+  border: 1px solid rgb(3, 154, 255);
+}

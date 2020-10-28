@@ -1,0 +1,18 @@
+<view class='container'>
+  <view class='card_wrap'>
+      <view class='card_item' bindtouchstart='touchstart' bindtouchend="touchend" animation="{{id === 0 ? animationData : ''}}" wx:for='{{cardInfoList}}' wx:key="unique" wx:for-index="id" wx:for-item="item">
+          <view class='card-container'>
+            <view>{{item.id}}.{{item.content}}</view>
+          </view>
+      </view>
+  </view>
+  <view class="cardLike" >
+  <view class="Like-ico"><image style="width:70rpx;height:70rpx" src="../../images/u6.png"></image><view class="text"  wx:for='{{cardInfoList}}'>{{item.like}}</view></view>
+  <view bindtap="articleTree"><mp-icon icon="add2" color="black" size="{{50}}"></mp-icon></view>
+  <view class="Like-ico"><image style="width:70rpx;height:70rpx;transform: rotate(180deg)" src="../../images/u6.png"></image><view class="text" wx:for='{{cardInfoList}}'>{{item.dislike}}</view></view>
+</view>
+<button class="btn" bindtap="{{hot?'getlist':'hotTree'}}">{{hot?'返回':'最热树叶'}}</button>
+</view>
+<mp-dialog title="" show="{{showOneButtonDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view style="text-align:left;color:#000;">学渣乐园的树洞里藏着很多人写有心里话的小树叶，去探索一下吧！</view>
+</mp-dialog>

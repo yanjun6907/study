@@ -1,0 +1,11 @@
+<view class="main">
+    <mp-form id="form">
+      <mp-cells>
+        <mp-cell  title="请输入昵称:" ext-class=" weui-cell_vcode">
+          <input class="weui-input" bindinput="formInputChange"></input>
+        </mp-cell>
+      </mp-cells>
+    </mp-form>
+  <view class="bottom">以英文字母或汉字开头，限4-16个字</view>
+</view>
+<button class="btn"  bindtap="submitForm">确定</button>

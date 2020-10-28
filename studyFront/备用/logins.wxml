@@ -1,0 +1,50 @@
+
+<view class="container">
+<div class="top">
+    <span class="top-lf">×</span>
+    求学大作战
+</div>
+<div class="content">
+    <div class="content-lf">头像</div>
+    <view class="text">
+        <p>愤怒的小鸟</p>
+        <p>逆袭豆:{{msg}}颗</p>
+    </view> 
+        <view class="content-rgt2" wx:if="{{foo==true}}" bindtap="clickme">签到</view>
+        <view class="content-rgt" wx:else>已签到</view>
+</div>
+<view class="main">
+    <view class="main-top">
+        <view class="main-text"><text>已累计签到</text>{{num2}}天</view>
+        <view class="main-text"><text>最高累计签到</text>{{num3}}天</view>
+    </view>
+    <view class="main-bottom">
+        <view class='display-space-between'>
+            <view></view>
+            <view>{{calendarTitle}}</view>
+            <view></view>
+        </view>      
+        <view class='calendar-background display-space-between'>
+            <view class='calendar-item' wx:for-items="{{weeks}}" wx:for-item="item" wx:key="item">{{item}}</view>
+            <view class='calendar-item {{item.current ? "":"text-gray"}} {{item.selected ? "text-red":""}}' wx:for-items="{{calendarDays}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index='{{index}}' bindtap='clickDate'>{{item.date}}</view> 
+        </view>     
+    </view>
+    <view class="main-contant" bindtap="lookme" >签到规则</view>
+</view>
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+    <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+    <view class="zan-dialog__mask" bindtap="toggleDialog" />
+    <view class="zan-dialog__container">
+      <view :style='padding:100rpx;'>此处是填充的布局代码</view>
+    </view>
+  </view>
+  <view class="zan-dialog2 {{ showDialog2 ? 'zan-dialog2--show' : '' }}">
+    <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+    <view class="zan-dialog2__mask" />
+    <view class="zan-dialog2__container">
+      <view :style='padding:100rpx;'>
+          <view style="font-size: 60rpx;float: right;" bindtap="toggleDialog2" >×</view>
+      </view>
+    </view>
+  </view>
+</view>

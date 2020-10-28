@@ -1,0 +1,35 @@
+.main {
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.phone {
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+  height: 100rpx;
+  font-size: 32rpx;
+  border-top:1px solid rgb(212, 212, 212);
+  border-bottom:1px solid rgb(212, 212, 212);
+  position: relative;
+}
+button[size=mini] {
+  position: absolute;
+  right: 35rpx;
+  padding: 0 10rpx;
+  margin: 0;
+  color: #0077ff;
+  background-color: #fff;
+}
+.bindInfo {
+  padding: 0 20rpx;
+  width: 400rpx;
+  
+  color: #a1a1a1;
+}
+.bottom {
+  height: 100rpx;
+  font-size: 28rpx;
+  padding-left: 30rpx;
+}

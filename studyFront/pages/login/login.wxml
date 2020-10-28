@@ -1,0 +1,30 @@
+<view class="container">
+  <image class="image" src="../../images/back.png"></image>
+  <button type="primary" class="btn" bindtap="open" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信用户一键登录</button>
+  <mp-halfScreenDialog 
+  bindbuttontap="buttontap"
+  show="{{show}}"
+  closabled='{{false}}'
+  maskClosable="{{false}}" 
+  buttons="{{buttons}}">
+  <view slot="title">
+    <view class="loginTitle">
+      <view class="loginLogo">求</view>
+	    <text class="loginText">求学大作战 申请</text>
+      <mp-icon class="icon" icon="error" color="gray" size="{{18}}"></mp-icon>
+    </view>
+    <view class="titleTip">获取你的昵称、头像、地区及性别</view>    
+	</view>
+	  <view slot="desc">
+      <view class="titleInfo">
+        <view class="titleImage"></view>
+        <view class="user">
+          <text class="userName">{{userName}}</text>
+          <text class="beans">微信个人信息</text>
+        </view>
+        <mp-icon wx:if="{{msg==true}}" class="icon" icon="done" color="green" size="{{25}}"></mp-icon>
+      </view>
+      <view class="titleTip2">使用其他头像和昵称</view>
+	  </view>
+</mp-halfScreenDialog>
+</view>

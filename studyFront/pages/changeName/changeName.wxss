@@ -1,0 +1,38 @@
+.main {
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+}
+.bottom {
+  padding: 0 30rpx;
+  font-size: 25rpx;
+  padding-left: 0 30rpx;
+}
+.btn {
+  margin-top: 60rpx;
+  width: 90%;
+  border: 1px solid #000;
+  background-color: #ffffff;
+}
+.weui-cells {
+  margin-top: 0;
+}
+.weui-cell_vcode {
+  height: 100rpx;
+  margin: 20rpx 0;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  border-top:1px solid rgb(228, 228, 228);
+  border-bottom:1px solid rgb(228, 228, 228);
+}
+.weui-cell {
+  padding: 0  30rpx;
+  font-size: 30rpx;
+  
+}
+.weui-label {
+  display: block;
+  width: 180rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+}

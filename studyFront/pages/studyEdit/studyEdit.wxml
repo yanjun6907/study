@@ -1,0 +1,31 @@
+
+<view class="titleInfo">   
+      <view class="user">
+        头像:
+      </view>
+      <view class="titleImage" bindtap="open"></view>
+    </view>
+<view class="main">
+  <view class="phone">
+    昵称:
+    <view>
+      <text style="font-size: 25rpx;color:#a3a3a3;margin-right: 15rpx;">{{userName}}</text>
+      <mp-icon icon="arrow" color="#a3a3a3" size="{{15}}"></mp-icon>
+    </view>
+  </view>
+  <view class="picker"> 
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{grade}}" header-text='选择年级'>
+      <view class="phone">
+        年级:
+      <view class="pickerGrade"> 
+        <view style="font-size: 25rpx;color:#a3a3a3;margin-right: 15rpx;">
+          {{grade[index]}}
+        </view>
+        <mp-icon icon="arrow" color="#a3a3a3" size="{{15}}"></mp-icon>
+      </view>
+      </view>
+    </picker> 
+    </view>
+  </view>
+  <mp-actionSheet bindactiontap="btnClick" show="{{showActionsheet}}" actions="{{groups}}" >
+</mp-actionSheet>

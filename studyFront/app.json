@@ -1,0 +1,24 @@
+{
+  "pages":[
+    "pages/sgins/sgins",
+    "pages/studyCard/studyCard",
+    "pages/studyEdit/studyEdit",
+    "pages/treeHole/treeHole",
+    "pages/treeArticle/treeArticle",
+    "pages/myCollection/myCollection",
+    "pages/login/login",
+    "pages/changeName/changeName",
+    "pages/phoneBind/phoneBind",
+    "pages/phoneChange/phoneChange",
+    "pages/phoneVerifiy/phoneVerifiy",
+    "pages/homePage/hpmePage"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "求学大作战",
+    "navigationBarTextStyle":"white"
+  },
+  
+  "sitemapLocation": "sitemap.json"
+}

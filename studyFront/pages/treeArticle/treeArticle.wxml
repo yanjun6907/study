@@ -1,0 +1,16 @@
+
+<view style="margin: 40rpx 5%;font-size: 35rpx;font-weight: 600;">藏片树叶</view>
+<view class="main">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入文本" style="height: 240rpx"  bindinput="getValueLength"  maxlength="80" auto-focus />
+                    <view class="weui-textarea-counter">已输入{{currentWordNumber|0}}/80</view>
+                </view>
+            </view>
+        </view>
+      </view>
+      <view class="bottom">
+        <view class="btn1" bindtap='goBack'>取消</view>
+        <view class="btn2" bindtap='saveArticle'>完成</view>
+      </view>

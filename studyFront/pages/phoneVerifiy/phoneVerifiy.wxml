@@ -1,0 +1,42 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+        <block wx:if="{{id==0}}">
+          <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+      <mp-cells>
+          <mp-cell  prop="qq" title="手机号:" ext-class="weui-cell_vcode">
+            <input   bindinput="formInputChange" data-field="qq"  class="weui-input" placeholder="请输入手机号"/>
+          </mp-cell>
+        </mp-cells>
+    </mp-form>
+    <mp-form id="form1" rules="{{rules1}}" models="{{formData}}">
+      <mp-cells>
+          <mp-cell  prop="mobile" title="验证码:" ext-class=" weui-cell_vcode">
+            <input type='number'  bindinput="formInputChange" data-field="mobile" class="weui-input" placeholder="请输入验证码"/> 
+            <button slot="footer" class="weui-vcode-btn" bindtap="{{smsFlag==0?'sendCode':'submitForm'}}" disabled='{{msg}}'>{{sendTime}}</button>
+          </mp-cell>
+        </mp-cells>
+    </mp-form>
+        </block>
+        <block wx:if="{{id==1}}">
+          <mp-form id="form2" rules="{{rules2}}" models="{{formData}}">
+      <mp-cells>
+          <mp-cell prop="email" title="邮　箱:" ext-class="weui-cell_vcode">
+            <input bindinput="formInputChange" data-field="email" class="weui-input" placeholder="请输入邮箱"/>
+          </mp-cell>
+        </mp-cells>
+    </mp-form>
+    <mp-form id="form3" rules="{{rules3}}" models="{{formData}}">
+      <mp-cells>
+          <mp-cell  prop="emailmobile" title="验证码:" ext-class=" weui-cell_vcode">
+            <input type='number' bindinput="formInputChange" data-field="emailmobile" class="weui-input" placeholder="请输入验证码"/>
+            <button slot="footer" class="weui-vcode-btn" bindtap="{{smsFlag==0?'sendCode':'submitForm2'}}" disabled='{{msg}}'>{{sendTime}}</button>
+          </mp-cell>
+        </mp-cells>
+      </mp-form>
+    </block>
+    <view class="weui-btn-area">
+      <button class="weui-btn" bindtap="{{id==0?'submitForm1':'submitForm3'}}">绑定</button>
+    </view>
+  </view>
+</view>
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>

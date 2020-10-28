@@ -1,0 +1,27 @@
+
+<view class="main-top">
+  <view class="top-btn">
+    <view class='btn-lf {{currentData == 0 ? "btn" : ""}}' data-current="0" bindtap='checkCurrent'>视频</view>
+    <view class='btn-rgt {{currentData == 1 ? "btn" : ""}}' data-current="1" bindtap='checkCurrent'>文章</view>
+  </view>
+</view>
+      <swiper current="{{currentData}}" duration="300" style="height:2290rpx;padding-top:130rpx;" bindchange="bindchange">
+          <swiper-item >
+                <view class="videoRow" wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}">
+                  <view class="video-lf"></view>
+                  <view class="video-rgt">
+                    <text style="word-break: break-all;font-size:28rpx;">大萨达是大的萨达十大阿达撒打算打算啊阿达</text>
+                  <view class="videoRole">
+                    <view>111111</view>
+                    <view>2222222</view>
+                  </view>
+                  </view>
+                </view>
+          </swiper-item>
+          <swiper-item>
+            <view class="swiper-item">2</view>
+          </swiper-item>
+      </swiper>
+<view wx:if="{{loading}}" class="loading">加载中。。。</view>
+
+  

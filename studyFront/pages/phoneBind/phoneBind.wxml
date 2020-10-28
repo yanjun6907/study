@@ -1,0 +1,14 @@
+<view class="main">
+  <view class="phone">
+    <text>手机号:</text>
+    <text class="bindInfo">{{Phone?Phone:'未绑定'}}</text>
+    <button class="mini-btn" type="default" size="mini" bindtap="{{Phone?'phoneChange':'phone'}}">{{Phone?'更换手机':'绑定手机'}}</button>
+  </view>
+  <view class="phone">
+    <text>邮　箱:</text>
+    <text class="bindInfo">{{Email?Email:'未绑定'}}</text>
+    <button class="mini-btn" type="default" size="mini" bindtap="{{Email?'emailChange':'email'}}">{{Email?'更换邮箱':'绑定邮箱'}}</button>
+  </view>
+  <view class="bottom">首次绑定手机/邮箱可获得20颗逆袭豆~</view>
+</view>
+

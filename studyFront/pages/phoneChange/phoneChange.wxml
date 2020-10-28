@@ -1,0 +1,32 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+      <mp-cells >
+        <block wx:if="{{id==0}}">
+        <view class=" weui-cell2">
+          <view>为了您的账户安全，需要验证您的手机号</view>
+          <view>{{telPhone}}</view>
+        </view>
+          <mp-cell  prop="mobile" title="验证码:" ext-class=" weui-cell_vcode">
+            <input bindinput="formInputChange" data-field="mobile" class="weui-input" placeholder="请输入验证码"/>
+            <view slot="footer" class="weui-vcode-btn">获取验证码</view>
+          </mp-cell>
+        </block>
+        <block wx:if="{{id==1}}">
+          <view class=" weui-cell2">
+            <view>为了您的账户安全，需要验证您的手机号</view>
+            <view>{{email}}</view>
+          </view>
+          <mp-cell prop="emailmobile" title="验证码:" ext-class=" weui-cell_vcode">
+            <input bindinput="formInputChange" data-field="emailmobile" class="weui-input" placeholder="请输入验证码"/>
+            <view slot="footer" class="weui-vcode-btn">获取验证码</view>
+          </mp-cell>
+        </block>
+      </mp-cells>
+    </mp-form>
+    <view class="weui-btn-area">
+      <button class="weui-btn" bindtap="submitForm">下一步</button>
+    </view>
+  </view>
+</view>
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
