@@ -2,18 +2,18 @@
 <div>
   <div class="meu-top">
     <div style="display:flex">
-      <label>发布时间: <el-date-picker v-model="input.createStart" type="date" placeholder="开始日期" :picker-options="pickerOptions0" style="width: 200px;">
+      <label>时 间: <el-date-picker v-model="input.createStart" type="date" placeholder="开始日期" :picker-options="pickerOptions0" style="width: 200px;">
         </el-date-picker> ~
         <el-date-picker v-model="input.createEnd" type="date" placeholder="结束日期" :picker-options="pickerOptions1" style="width: 200px;">
         </el-date-picker>
       </label>
-      <label style="justify-content: flex-end;"><label style=" letter-spacing: 28px;">热</label>度:
-        <el-input v-model="input.hotStart" style="width: 200px;" @change="load.inputEnd()"></el-input> ~ <el-input v-model="input.hotEnd" style="width: 200px;" @change="load.inputEnd()"></el-input>
+      <label style="justify-content: flex-end;">热 度:
+        <el-input v-model="input.hotStart" type="number" style="width: 200px;" @change="load.inputEnd()"></el-input> ~ <el-input v-model="input.hotEnd" type="number" style="width: 200px;" @change="load.inputEnd()"></el-input>
       </label>
     </div>
     <div style="display:flex">
-      <label><label style=" letter-spacing: 28px;">顶</label>数: <el-input v-model="input.likeStart" @change="load.inputEnd()" style="width: 200px;"></el-input> ~ <el-input v-model="input.likeEnd" style="width: 200px;" @change="load.inputEnd()"></el-input></label>
-      <label style="justify-content: flex-end;"><label style=" letter-spacing: 28px;">踩</label>数: <el-input v-model="input.dislikeStart" @change="load.inputEnd()" style="width: 200px;"></el-input> ~ <el-input v-model="input.dislikeEnd" style="width: 200px;" @change="load.inputEnd()"></el-input></label>
+      <label>顶 数: <el-input v-model="input.likeStart" type="number" @change="load.inputEnd()" style="width: 200px;"></el-input> ~ <el-input v-model="input.likeEnd" type="number" style="width: 200px;" @change="load.inputEnd()"></el-input></label>
+      <label style="justify-content: flex-end;">踩 数: <el-input v-model="input.dislikeStart" type="number" @change="load.inputEnd()" style="width: 200px;"></el-input> ~ <el-input v-model="input.dislikeEnd" type="number" style="width: 200px;" @change="load.inputEnd()"></el-input></label>
     </div>
     <div class="menu-but">
       <el-button size="mini" plain @click="reset()">重置</el-button>
@@ -27,7 +27,7 @@
     <el-table :data="table" style="width: 100%" border>
       <el-table-column label="序号" type="index" width="80" align="center">
       </el-table-column>
-      <el-table-column label="发布时间" align="center" width="180">
+      <el-table-column label="发布时间" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.createAt|times }}</span>
         </template>
@@ -37,24 +37,24 @@
           <span>{{ scope.row.content }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="顶数" width="120" align="center">
+      <el-table-column label="顶数" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.like }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="踩数" width="120" align="center">
+      <el-table-column label="踩数" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.dislike }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="热度" width="120" align="center">
+      <el-table-column label="热度" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.hot }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="120" align="center">
         <template slot-scope="scope">
-          <el-button type="text" size="mini" icon="el-icon-delete" @click="handleDelete(scope.row.id)">删除</el-button>
+          <el-button type="text" style="color:red" size="mini" icon="el-icon-delete" @click="handleDelete(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

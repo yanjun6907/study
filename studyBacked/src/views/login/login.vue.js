@@ -3,8 +3,8 @@ module.exports = {
     data(){
         return {
             checked: false,
-            ruleForm2:this.verify.ruleForm2,
-            rules2:this.verify.rules2
+            ruleForm2:this.cont.ruleForm2,
+            rules2:this.cont.rules2
         }
     },
     created() {
@@ -17,7 +17,7 @@ module.exports = {
                 if(valid){
                     let user = `name=${this.ruleForm2.name}&password=${this.ruleForm2.password}`
                     this.$http.postLogin(user).then(res=>{
-                        console.log(res)
+                        // console.log(res)
                         if(res.data.code==0){
                             sessionStorage.setItem('auth_token',res.data.data.token)
                             sessionStorage.setItem('auth_name',this.ruleForm2.name)
@@ -29,6 +29,6 @@ module.exports = {
                     })
                 }
             })
-        }
-    }
+        },
+    }   
 }

@@ -13,13 +13,14 @@
     border-radius: 8px;
 }
 .list-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 40px;
     line-height: 40px;
     font-size: 18px;
     font-weight: 600;
-    padding:0 0 15px;
-  
 }
 .el-table th>.cell {
     font-size: 14px;
@@ -33,23 +34,26 @@
     padding: 0;
 }
 .mainContent {
-    width: 100%;
+    width: 500px;
+    margin:5% auto;
     font-size: 15px;
+    font-weight: 550;
     letter-spacing:3px;
     color: #000!important;
-    border: 1px solid #727272;
+    border: 6px solid rgb(199, 199, 199);
+    border-radius: 6px;
 }
 .mainContent p {
     font-size: 18px;
     padding: 10px;
-    border-bottom: 1px solid #727272;
+    border-bottom: 1px solid #dddddd;
 }
 .userInfo {
     padding: 10px;
     display: flex;
     flex-flow: row;
     align-items: center;
-    border-bottom: 1px solid #727272;
+    border-bottom: 1px solid #dddddd;
 }
 .userName {
     padding-left: 10px;
@@ -70,11 +74,11 @@
     width: 300px!important;
 }
 .image {
-    margin: 15px auto;
+    margin: 10px auto;
     text-align: center;
 }
 .image img {
     width:250px;
     height:200px;
-    border: 10px solid #e0e0e0;
+    border: 10px dashed rgb(199, 199, 199);
 }

@@ -56,7 +56,7 @@
           <span>{{ scope.row.nickName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="发布时间" align="center" width="100">
+      <el-table-column label="发布时间" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.createTime |times}}</span>
         </template>
@@ -66,12 +66,12 @@
           <span>{{ scope.row.grade | status8 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="阅读量" width="100" align="center" sortable="custom">
+      <el-table-column label="阅读量" width="100" align="center" sortable="custom1">
         <template slot-scope="scope">
           <span>{{ scope.row.readNum }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="评论数" width="100" align="center" sortable="custom">
+      <el-table-column label="评论数" width="100" align="center" sortable="custom2">
         <template slot-scope="scope">
           <span>{{ scope.row.remarkNum }}</span>
         </template>
@@ -81,11 +81,11 @@
           <span>{{ scope.row.essence | status9 }} {{ scope.row.top | status10 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="160" align="center">
+      <el-table-column label="操作" width="100" align="center">
         <template slot-scope="scope">
           <el-button size="mini" type="text" @click="leaveEdit(scope.row.id)">查看</el-button>
           <el-button size="mini" type="text" :style="scope.row.essence==1?'color:red':''" @click="handleStatus(scope.row.id,scope.row.essence)">{{scope.row.essence==0?'加精':'普通'}}</el-button>
-          <el-button size="mini" type="text" :style="scope.row.top==1?'color:red':''" @click="handleTop(scope.row.id,scope.row.top)">{{scope.row.top==0?'置顶':'取消'}}</el-button>
+          <el-button size="mini" style="margin-left: 0;" type="text" :style="scope.row.top==1?'color:red':''" @click="handleTop(scope.row.id,scope.row.top)">{{scope.row.top==0?'置顶':'取消'}}</el-button>
           <el-button size="mini" type="text" style="color:red" @click="handleDelete(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>

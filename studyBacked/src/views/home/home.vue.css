@@ -1,11 +1,5 @@
-    .menu_page {
-        min-height: 100%;
-        background-color: #32405700;	
-    }
-    .sidebar {
-        position: relative;
-        overflow: hidden;
-       
+    .body {
+        display: flex;
     }
     .wrapper {
         position: absolute;
@@ -18,11 +12,8 @@
         overflow: hidden;
     }
     .el-menu {
+        width: 180px;
         border: none;
-    }
-
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-        width: 205px;
     }
     a {
         text-decoration: none;    
@@ -62,18 +53,34 @@
         display: inline-block;
     }
 
-    .navTitle {
+    #navTitle {
+        width: 180px;
         vertical-align: middle;
-        font-size: 24px;
-        font-family: "Microsoft YaHei";
+        font-size: 22px;
+        line-height: 80px;
         letter-spacing: 2px;
+        text-align: center;
+        text-decoration: none;
+        font-family: "Microsoft YaHei";
+        background-image: -webkit-linear-gradient(left, #3498db, #f47920 10%, #f7acbc 30%, #ffd400 40%, #3498db 50%, #f47920 60%, #f7acbc 80%, #ffd400 90%, #3498db);
+        color: transparent;
+        -webkit-background-clip: text;
+        background-size: 200% 100%;
+        -webkit-animation: slide 1s infinite linear;
+        animation: slide 3s infinite linear;
     }
-
+    @keyframes slide {
+        0% {
+            background-position: 0 0;
+        }
+    
+        100% {
+            background-position: -100% 0;
+        }
+    }
     .user {
-        /* line-height: 60px; */
         text-align: right;
         float: right;
-        /* padding-right: 10px; */
     }
 
     .btn-fullscreen {
@@ -86,12 +93,10 @@
     .el-menu-item,.el-submenu__title {
         font-weight: 500;
         font-size: 16px;
+        min-width: 180px!important;
     }
-
 	.menu_page {
-	min-height: 100%;
-	
-	/* z-index: 99; */
+	    min-height: 100%;
 	}
     .el-header{ 
         text-align: left;
@@ -99,34 +104,24 @@
         line-height: 80px;
         padding: 0;
         box-shadow: 0 0 12px #fff!important;
-        background-color: black;
+        background-color: rgba(0, 0, 0, 0.8);
         z-index: 999;
     }
-      
     .el-aside {
+        width: 180px;
         color: #000;
         text-align: center;
-        /* margin:20px 0 100px 5px; */
-        box-shadow: 0 0 15px #fff;
-        /* border-radius: 8px; */
-        background-color: rgba(0, 0, 0, .75);
-        z-index: 998;
-    }
-      
+        box-shadow: 0 0 12px #fff;
+        background-color: #000;
+        z-index: 1000;
+        transition: width .4s;
+        overflow: hidden;
+    }   
     .el-main {     
         color: #000;
         padding-bottom: 0;
         border-top: 10px solid rgba(0, 0, 0, 1);
         border-left: 10px solid rgba(0, 0, 0, 1);
-    }
-       
-    .el-container:nth-child(5) .el-aside,
-    .el-container:nth-child(6) .el-aside {
-        line-height: 260px;
-    }
-      
-    .el-container:nth-child(7) .el-aside {
-        line-height: 320px;
     }
     .rgt {
         display: flex;
@@ -142,7 +137,7 @@
         cursor: pointer;
     }
     .el-icon-s-operation,.el-icon-arrow-down {
-        color: #ffc400!important;
+        color: #ccc!important;
         font-weight: 550;
         font-size: 18px;
     }
@@ -152,15 +147,22 @@
         overflow: hidden;
     }
     .el-menu-item.is-active {
-        background-color: rgb(255, 255, 255,0.8)!important;
+        background-color: #ffffff80!important;
     }
     .el-menu-item:hover {
-        background-color: rgba(255, 255, 255, 0.8)!important;
+        background-color: #ffffff80!important;
     }
-    .el-submenu__title {
-        padding: 0 25px!important;
+    .el-submenu__title:hover {
+        background-color: #ffffff80!important;
     }
-    .el-menu--collapse {
-        width: 70px!important;
-        
+    .el-submenu__icon-arrow {
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        margin-top: -7px;
+        transition: transform .3s;
+        font-size: 18px;
+    }
+    .el-submenu__title span {
+        margin-right: 30px;
     }

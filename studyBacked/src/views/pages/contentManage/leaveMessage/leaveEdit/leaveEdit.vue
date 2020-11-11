@@ -1,9 +1,10 @@
 <template>
 <div>
   <div class="meu-top">
-    <span class="list-title">
+    <div class="list-title">
       查看帖子
-    </span>
+      <el-button size="mini" @click="resetForm()">返回</el-button>
+    </div>
     <div class="mainContent">
       <p>{{readTopic.title}}</p>
       <div class="userInfo">
@@ -39,7 +40,7 @@
       </el-table-column>
       <el-table-column label="操作" width="150" align="center">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row.id)">删除</el-button>
+          <el-button size="mini" style="color:red" type="text" icon="el-icon-delete" @click="handleDelete(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

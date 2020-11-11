@@ -4,16 +4,10 @@ module.exports = {
 module.exports = {
     data() {
         return {
-          imageUrl: '',
-          ruleForm:this.verify.ruleForm4,
-          dialogImageUrl: '',
-          dialogVisible: false,
-          hideUploadVideo: false,
-          fileLists: [],
-          editorOption:this.cont.editor
+          ruleForm:this.cont.ruleForm4,
         }
       },
-      beforeMount() {
+      created() {
         this.load. openFullScreen()
         let id = this.$route.query.id
         if(id){
@@ -26,21 +20,12 @@ module.exports = {
         //获取文章
         async getEdit(id){
           const {data:res} = await this.$http.getVideoEdit(id)
-          console.log(res)
+          // console.log(res)
           this.ruleForm = res.data
-          this.fileLists = [{url:res.data.videoImage}]
-          this.hideUploadVideo = true 
         },
         //返回
-        resetForm(formName) {
-          this.$refs[formName].resetFields();
+        resetForm() {
           this.$router.push('/video')
-        },
-        //预览大图
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
-        },
- 
+        }
       }
     }

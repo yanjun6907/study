@@ -37,7 +37,7 @@
       <el-table-column label="操 作" width="200" align="center">
         <template slot-scope="scope">
           <el-button type="text" icon="el-icon-edit" size="mini" @click="handleEdit(scope.row.id)">编辑</el-button>
-          <el-button type="text" icon="el-icon-delete" size="mini" @click="handleDelete(scope.row.id)">删除</el-button>
+          <el-button type="text" style="color:red" icon="el-icon-delete" size="mini" @click="handleDelete(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -48,7 +48,7 @@
   </div>
   <!-- 新增编辑弹框 -->
   <el-dialog :title="form.id?'编辑账户':'新增账户'" :visible.sync="dialogFormVisible" center @close="showSetRightDialogClosed" width="60%">
-    <el-form :model="form" :rules="rules" label-width="75px" class="demo-ruleForm editForm" ref="ruleForm">
+    <el-form :model="form" :rules="rules" label-width="75px" class="editForm" ref="ruleForm">
       <el-form-item label="用 户 名 : " prop="name">
         <el-input v-model="form.name"></el-input>
       </el-form-item>

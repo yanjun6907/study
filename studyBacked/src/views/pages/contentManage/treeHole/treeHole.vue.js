@@ -49,9 +49,9 @@ module.exports = {
                 type: 'warning',
                 center: true
             }).then(() => {
-                this.$http.deleteLeave(id).then(res=>{
-                    console.log(res.data)
-                    if(res.data.code==0){
+                this.$http.deleteTree(id).then(res=>{
+                    // console.log(res.data)
+                    if(res.data.code==1202){
                         this.getList()
                         this.$message({type:'success',message:'删除成功',center: true})
                     } 
@@ -71,7 +71,7 @@ module.exports = {
             this.pages.page = 1
             this.pages.size = 10
             this.getList()
-          },
+        },
         /* -------------分页-------------- */
         handleSizeChange(val) {
             this.pages.size = val

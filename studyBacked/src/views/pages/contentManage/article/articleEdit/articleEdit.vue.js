@@ -1,18 +1,18 @@
 module.exports = {
 data() {
     return {
-      ruleForm:this.verify.ruleForm,
-      rules:this.verify.rules,
-      dialogImageUrl: '',
+      ruleForm:this.cont.ruleForm,
+      editorOption:this.cont.editor,
+      rules:this.cont.rules,  
       dialogVisible: false,
       hideUploadArticle: false,
-      limitCount:1,
+      dialogImageUrl: '',
       fileLists: [],
-      editorOption:this.cont.editor,
       articleId:''
     }
   },
   created() {
+    this.ruleForm.type = 0
     this.load. openFullScreen()
     this.articleId = this.$route.query.id
     if(this.articleId){
@@ -26,65 +26,83 @@ data() {
     async getEdit(id){
       const {data:res} = await this.$http.getArticleEdit(id)
       this.ruleForm = res.data
-      this.fileLists = [{url:res.data.articleImage}]
+      this.fileLists = [{url:res.data.letterImage}]
       this.hideUploadArticle = true 
     },
     //文章详情保存
     async submitForm(formName) {
       if(this.articleId){
-        const {data:res} = await this.$http.putArticleEdit(this.ruleForm)
-        if(res.code==2000){
-          this.$router.push('/article')
+        const {data:res} = await this.$http.patchArticleEdit(this.articleId,this.ruleForm)
+        if(res.code==3202){
+          setTimeout(() => {
+            this.$router.push('/article')
+          }, 1500)
         }
       }else{
         const {data:res} = await this.$http.postArticleEdit(this.ruleForm)
-        if(res.code==2000){
-          this.$router.push('/article')
+        // console.log(res)
+        if(res.code==3202){
+          setTimeout(() => {
+            this.$router.push('/article')
+          }, 1500)
         }
       }
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          this.$message.success({message:`保存成功！`,center: true})
           return true
         } else {
-          console.log('error submit!!');
-          return false;
+          this.$message.warning({message:`内容填写不完整！`,center: true})
+          return false
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    //清空
+    resetForm(formName){
+      this.$refs[formName].resetFields()
+      this.fileLists = []
+      setTimeout(() => {
+        this.hideUploadArticle = false
+      }, 100);  
+    },
+    //取消
+    goBack(formName) {
+      this.resetForm(formName)
       this.$router.push('/article')
     },
-    //上传
-    uploadFile(){
-
+   /*-------------上传---------------*/
+    async uploadFile(file){
+      this.hideUploadArticle = true
+      const {data:res} = await this.$http.uploadFile(file.file)
+      if (res.code == 0) {
+        setTimeout(()=>{
+          this.ruleForm.letterImage = res.data.url
+          this.$message.success({message:`上传成功！`,center: true})
+        },100) 
+      }else {
+        this.$message.error({message:`上传失败！`,center: true})
+      }
     },
-    //删除
+    beforeExcelUpload(file) {
+      if (file.size > 1024 * 1024 * 0.4) {
+        this.$message.error({ message: "图片大小不超过400KB!", center:'true'})
+        return false
+      }
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
+    },
     handleRemove(file, fileList) {
       setTimeout(()=>{
-        this.hideUploadArticle = fileList.length >= this.limitCount;
+        this.hideUploadArticle = false
       },100)  
-      this.fileLists = fileList;
-      this.ruleForm.articleImage='';
+      this.fileLists = fileList
+      this.ruleForm.letterImage=''
     },
-    //获取文件名和文件大小
-    handlePreview(file, fileList) {
-      this.hideUploadArticle = fileList.length >= this.limitCount;
-      let that = this;
-    if (file.raw.size > 1024 * 1024 * 5) {
-      that.$message.error('上传文件大小不能超过 5MB!');
-      return;
-    }  
-    },
-    //限制文件个数
-    fileExceed:function(files, fileList){
-      this.$message.warning(`当前限制选择 1 个文件`)
-    },
-    //预览大图
-    handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-    },
+    uploadEorror(){
+      this.$message.error("视频上传失败,请联系客服！");
+      this.hideUploadVideo = false
+   },
   }
 }

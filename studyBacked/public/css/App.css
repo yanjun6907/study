@@ -7,20 +7,20 @@
 }
 
 .el-input__inner {
-    
-    height: 30px !important;
+    height: 40px !important;
+    border-radius: 0!important;
 }
 
 .el-input__icon {
-    line-height: 30px !important;
+    line-height: 40px !important;
 }
 
 .el-form-item__label {
     color: #000 !important;
+    line-height: 40px !important;
 }
 
-.ql-container,
-.ql-editor {
+.ql-container,.ql-editor {
     height: 300px !important;
 }
 .ql-toolbar.ql-snow {
@@ -29,22 +29,58 @@
     display: inline-block;
     width: 100%;
 }
+.ql-editor {
+    height: 300px;
+}
 .el-form-item__error {
     padding: 0;
     margin-top: 2px;
     font-size: 14px!important;
     color: #990000;
 }
-.el-table thead {
-    
+.el-table thead {   
     color: #000!important;
 }
-.el-table th>.cell {
-    font-size: 16px!important;
-    font-weight: 600!important;
-}
+
 .el-table--border td, .el-table--border th, 
 .el-table__body-wrapper 
 .el-table--border.is-scrolling-left~.el-table__fixed {
     border-right: none!important;
+}
+
+input[type=number] {  
+    -moz-appearance:textfield;  
+}  
+input[type=number]::-webkit-inner-spin-button,  
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+} 
+.el-upload--picture-card {
+    background-color: #fff!important;
+    border: 5px dashed rgb(199, 199, 199)!important;
+    border-radius: 0px!important;
+    width: 160px!important;
+    height: 160px!important;
+    line-height: 160px!important;
+}
+.el-upload-list--picture-card .el-upload-list__item {
+    border: 5px dashed rgb(199, 199, 199)!important;
+    border-radius: 0px!important;
+    width: 160px!important;
+    height: 160px!important;
+    margin: 0!important;
+}
+.el-pagination button,.el-pager li, 
+.el-pagination span:not([class*=suffix]) {
+    height: 40px!important;
+    line-height: 40px!important;
+}
+.el-textarea.is-disabled .el-textarea__inner,
+.el-input.is-disabled .el-input__inner{
+    color: #000!important;
+}
+.el-upload-list__item.is-success 
+.el-upload-list__item-status-label {
+    display: none!important;
 }

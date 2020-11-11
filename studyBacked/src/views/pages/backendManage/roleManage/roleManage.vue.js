@@ -24,7 +24,7 @@ module.exports = {
         async getList(){
             let page = `page=${this.pages.page}&size=${this.pages.size}`
             const {data:res} = await this.$http.getRoleList(page)
-            console.log(res)
+            // console.log(res)
             if(res.code==0){
                 this.table = res.data.list
                 this.pages.totalSize = res.data.totalSize
@@ -93,7 +93,7 @@ module.exports = {
                 center: true
             }).then(() => {
                 this.$http.deleteRole(id).then(res=>{
-                    console.log(res)
+                    // console.log(res)
                     if(res.data.code==0){
                         this.getList()
                         this.$message({type:'success',message:'删除成功',center: true})
@@ -116,12 +116,12 @@ module.exports = {
         handleSizeChange(val) { 
             this.pages.size = val; 
             this.getList()        
-            console.log(`每页 ${val} 条`);
+            // console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
             this.pages.page = val;
             this.getList()
-            console.log(`当前页: ${val}`);
+            // console.log(`当前页: ${val}`);
         },
      
     },

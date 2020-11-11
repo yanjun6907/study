@@ -25,7 +25,7 @@
       </label>
     </div>
     <div style="display:flex;margin-left: 50px;">
-      <label>逆袭豆: <el-input v-model="input.beanStart" style="width: 200px;" @change="load.inputEnd()"></el-input> — <el-input v-model="input.beanEnd" style="width: 200px;" @change="load.inputEnd()"></el-input></label>
+      <label>逆袭豆: <el-input v-model="input.beanStart" type="number" style="width: 200px;" @change="load.inputEnd()"></el-input> — <el-input v-model="input.beanEnd" type="number" style="width: 200px;" @change="load.inputEnd()"></el-input></label>
       <div style="text-align: right;flex:1">
         <el-button size="mini" plain @click="resetData()">重置</el-button>
         <el-button size="mini" plain icon="el-icon-search" @click="getSearch()">查找</el-button>
@@ -76,7 +76,7 @@
       <el-table-column label="操作" width="180" align="center">
         <template slot-scope="scope">
           <el-button size="mini" type="text" @click="handleEdit(scope.row.id)">查看</el-button>
-          <el-button size="mini" type="text" @click="handleStatus(scope.row.id, scope.row.status)">{{scope.row.status==1?'冻结':'解冻'}}</el-button>
+          <el-button size="mini" :style="scope.row.status==1?'color:red':''" type="text" @click="handleStatus(scope.row.id, scope.row.status)">{{scope.row.status==0?'冻结':'解冻'}}</el-button>
         </template>
       </el-table-column>
     </el-table>

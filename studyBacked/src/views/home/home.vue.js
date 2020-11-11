@@ -3,37 +3,39 @@
         data() {
             return {
                 roleName:sessionStorage.getItem('auth_name'),
+                roles:'',
                 fullscreen: false,
                 collapse:false,
                 showlrc: true,
-                menus:[]//导航数据
+                Menus: []//导航数据
             }
         },
-        created() {  
-            this.getNav() 
-            this.load.openFullScreen()  
+        created(){     
+            this.load.openFullScreen()
+            this.getNav()
         },
         methods:{
-            //导航
+            //动态导航   
             async getNav(){
                 const {data:res} = await this.$http.getNavList()
                 const {data:e} = await this.$http.getRoleRight()
+                this.roles = e.data.roleName
                 for(let i=0;i<e.data.permissionList.length;i++){
                     for (const key in res.data) { 
                         if(e.data.permissionList[i]==res.data[key].id){
-                            this.menus.unshift(res.data[key])    
+                            this.Menus.unshift(res.data[key])    
                         }         
                     }
                 }
                 for(let i=0;i<e.data.permissionList.length;i++){
-                    for (const k in this.menus) { 
-                        for (const x in this.menus[k].children) { 
-                            if(e.data.permissionList[i]==this.menus[k].children[x].id) {    
-                                this.menus[k].children2.unshift(this.menus[k].children[x]) 
+                    for (const k in this.Menus) { 
+                        for (const x in this.Menus[k].children) { 
+                            if(e.data.permissionList[i]==this.Menus[k].children[x].id) {    
+                                this.Menus[k].children2.unshift(this.Menus[k].children[x]) 
                             }  
                         }  
                     } 
-                } 
+                }    
             },
             //注销
             goBack(){
@@ -45,9 +47,9 @@
                 }).then(() => {
                     sessionStorage.removeItem('auth_token')
                     sessionStorage.removeItem('auth_name')
-                    this.verify.ruleForm2.name=''
-                    this.verify.ruleForm2.password=''
-                    this.$router.push('/')
+                    this.cont.ruleForm2.name=''
+                    this.cont.ruleForm2.password=''
+                    this.$router.push('/')   
                     this.$message({type:'success',message:'注销成功',center: true}) 
                 }).catch(() => {
                     this.$message({
@@ -61,13 +63,11 @@
             collapseChage() {
                 this.collapse = !this.collapse;
                 if(this.collapse){
-                    setTimeout(()=>{
-                        document.getElementById('aside').style.width=70+'px';
-                    },300)
+                    document.getElementById('aside').style.width=0+'px';
                 }else {
-                    setTimeout(()=>{
-                        document.getElementById('aside').style.width=205+'px';
-                    },300)
+                    setTimeout(() => {
+                         document.getElementById('aside').style.width=180+'px';
+                    }, 250);
                 }       
             },
             //全屏显示

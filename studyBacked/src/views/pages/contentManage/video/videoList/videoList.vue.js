@@ -19,12 +19,12 @@ module.exports = {
         },
         //获取列表
         async getList(){
-            this.input.page=this.pages.page
-            this.input.size=this.pages.size
+            this.input2.page=this.pages.page
+            this.input2.size=this.pages.size
             const {data:res} = await this.$http.postVideoList(this.input2)
             this.input = res.data.list
             this.pages.totalSize = res.data.totalSize;
-            console.log(res)
+            // console.log(res)
         }, 
         /* ---------------列表按钮---------------- */
         //视频新增
@@ -33,7 +33,7 @@ module.exports = {
         },
         //视频查看
         handleIncrease(id){
-            this.$router.push({path: '/videoIncrease', query: {id}})
+            this.$router.push({path: '/videoInrease', query: {id}})
             console.log(id)
         },
         //视频编辑
@@ -50,7 +50,7 @@ module.exports = {
                 center: true
             }).then(() => {
                 this.$http.delVideo(id).then(res=>{
-                    console.log(res.data)
+                    // console.log(res.data)
                     if(res.data.code==0){
                         this.getList()
                         this.$message({type:'success',message:'删除成功',center: true})
@@ -65,18 +65,20 @@ module.exports = {
         },
         //上下架
         handleStatus(id,status){
-            let param =`id=${id}&status=${status=status==1?0:1}`;
+            let param =`status=${status=status==1?0:1}`;
             this.$confirm(`${status==1?'是否上架?':'是否下架?'}`, '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning',
                 center: true
             }).then(()=>{
-                this.$http.videoStatus(param).then(res=>{
-                    console.log(res)
+                this.$http.videoStatus(id,param).then(res=>{
+                    // console.log(res)
                     if(res.data.code==0){              
                         this.getList()
                         this.$message({type:'success',message:`${status==1?'已上架':'已下架'}`,center: true})
+                    }else if(res.data.code==3207){
+                        this.$message({type:'warning',message:`已上架 banner 超过 8 个`,center: true})
                     } 
                 })
             }).catch(() => {
@@ -100,12 +102,12 @@ module.exports = {
         handleSizeChange(val) {
             this.pages.size = val
             this.getList()
-            console.log(`每页 ${val} 条`);
+            // console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
             this.pages.page = val
             this.getList()
-            console.log(`当前页: ${val}`);
+            // console.log(`当前页: ${val}`);
         },
-      }
+    }
 }

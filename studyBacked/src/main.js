@@ -2,10 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import Video from 'video.js'//视频播放器
-import 'video.js/dist/video-js.css'
-Vue.prototype.$video = Video
-
 import ElementUI from 'element-ui'//全局UI库
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI);
@@ -23,9 +19,6 @@ Vue.prototype.load = load
 
 import cont from './components/content/content.js'//常量表
 Vue.prototype.cont = cont
-
-import verify from './components/content/verify.js'//验证文件
-Vue.prototype.verify = verify
 
 import VueQuillEditor from 'vue-quill-editor'//富文本编辑器
 import 'quill/dist/quill.core.css'

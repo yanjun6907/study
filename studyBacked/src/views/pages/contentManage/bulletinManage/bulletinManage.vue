@@ -2,7 +2,7 @@
 <div class="manage">
   <div class="manage-top">
     <div class="topTitle">
-      <label style="flex:1">公告标题: <el-input v-model="title" style="width: 350px;"></el-input></label>
+      <label style="flex:1">公告标题: <el-input v-model="input.title" style="width: 350px;"></el-input></label>
       <div style="flex:1;text-align:right;line-height:40px;margin-right: 0;">
         <el-button size="mini" plain @click="showSetRightDialogClosed()">重置</el-button>
         <el-button size="mini" icon="el-icon-search" plain @click="getSearch()">查询</el-button>
@@ -40,11 +40,10 @@
           <span>{{ scope.row.status|status2 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="220" align="center">
+      <el-table-column label="操作" width="150" align="center">
         <template slot-scope="scope">
           <el-button size="mini" type="text" @click="handleEdit(scope.row.id)">查看</el-button>
-          <el-button size="mini" type="text" @click="handleStatus(scope.row.id,scope.row.status)">{{scope.row.status==1?'下架':'上架'}}</el-button>
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row.id)">删除</el-button>
+          <el-button size="mini" :style="scope.row.status==0?'color:red':''" type="text" @click="handleStatus(scope.row.id,scope.row.status)">{{scope.row.status==1?'下架':'上架'}}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -54,19 +53,19 @@
     </div>
   </div>
   <!-- 新增编辑弹框 -->
-  <el-dialog :title="form.id?'编辑公告':'新增公告'" :visible.sync="dialogFormVisible" center @close="showSetRightDialogClosed">
+  <el-dialog :title="form.id?'查看公告':'新增公告'" :visible.sync="dialogFormVisible" center @close="showSetRightDialogClosed">
     <el-form :model="form">
       <el-form-item label="标题:" label-width="45px">
-        <el-input v-model="form.title" maxlength="14" show-word-limit placeholder="请输入公告标题"></el-input>
+        <el-input :disabled="form.id!==''" v-model="form.title" maxlength="14" show-word-limit placeholder="请输入公告标题"></el-input>
       </el-form-item>
       <el-form-item label="内容:" label-width="45px">
-        <el-input v-model="form.content" type="textarea" maxlength="140" :autosize="{ minRows: 6}" show-word-limit placeholder="请输入公告内容"></el-input>
+        <el-input :disabled="form.id!==''" v-model="form.content" type="textarea" maxlength="140" :autosize="{ minRows: 6}" show-word-limit placeholder="请输入公告内容"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
-      <el-button @click="showSetRightDialogClosed()">重 置</el-button>
-      <el-button @click="saveEdit()" :disabled="form.title==''||form.content==''">保 存</el-button>
+      <el-button @click="dialogFormVisible = false">{{form.id?'返回':'取 消'}}</el-button>
+      <el-button v-if="form.id==''" @click="showSetRightDialogClosed()">重 置</el-button>
+      <el-button v-if="form.id==''" @click="saveEdit()" :disabled="form.title==''||form.content==''">保 存</el-button>
     </div>
   </el-dialog>
   <!-- 新增编辑弹框 -->

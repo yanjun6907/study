@@ -1,5 +1,5 @@
 module.exports = {
-    data(){
+    data() {
         return {
             table:this.cont.remarkTable,
             pages:this.cont.pages,
@@ -15,13 +15,13 @@ module.exports = {
           this.getList(id) 
         } 
         return false  
-      },
+    },
     methods: {
         /* ------------------后台请求-------------------- */
         //获取详情
         async getEdit(id){
             const {data:res} = await this.$http.getLeaveArticle(id)
-            console.log(res)
+            // console.log(res)
             this.readTopic = res.data.topic
             this.readUser = res.data.user
         },
@@ -29,7 +29,7 @@ module.exports = {
         async getList(id){
             let pages = `id=${id}&page=${this.pages.page}&size=${this.pages.size}`
             const {data:res} = await this.$http.postLeaveremark(pages)
-            console.log(res)
+            // console.log(res)
             this.table = res.data.list
             this.pages.totalSize=res.data.totalSize
         },
@@ -43,8 +43,8 @@ module.exports = {
                 center: true
             }).then(() => {
                 this.$http.deleteRemark(id).then(res=>{
-                    console.log(res.data)
-                    if(res.data.code==0){
+                    // console.log(res.data)
+                    if(res.data.code==1302){
                         this.getList()
                         this.$message({type:'success',message:'删除成功',center: true})
                     } 
@@ -55,6 +55,9 @@ module.exports = {
                     message: '已取消删除'
                 });          
             });   
+        },
+        resetForm(){
+            this.$router.push('/topic')
         },
         /* ----------------分页功能------------------ */
         handleSizeChange(val) {

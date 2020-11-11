@@ -53,7 +53,7 @@ const routes = [
         component: () => import('../views/pages/contentManage/video/videoList/videoList')
       },
       {
-        path:'/videoIncrease',
+        path:'/videoInrease',
         component: () => import('../views/pages/contentManage/video/videoInrease/videoInrease')
       },
       {
@@ -82,7 +82,7 @@ const routes = [
       },
       {
         path: "/404",
-        component: () => import('../components/pageNotFound/erorr')
+        component: () => import('../components/404/erorr')
       }
     ],
     meta:{requireAuth:true},

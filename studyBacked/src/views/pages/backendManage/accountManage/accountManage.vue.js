@@ -6,8 +6,8 @@ module.exports = {
             pages:this.cont.pages,
             table:this.cont.manageTable,
             dialogFormVisible: false,
-            form:this.verify.ruleForm6,
-            rules:this.verify.rules6
+            form:this.cont.ruleForm6,
+            rules:this.cont.rules6
         }
     },
     created() {
@@ -30,7 +30,7 @@ module.exports = {
         async getSearch(){
             let page = `name=${this.form.name}&roleId=${this.form.roleId}`
             const {data:res} = await this.$http.getAccountSearch(page)
-            console.log(res)
+            // console.log(res)
             this.table = res.data.list
             this.pages.totalSize = res.data.totalSize
         },
@@ -80,7 +80,7 @@ module.exports = {
                 center: true
             }).then(() => {
                 this.$http.deleteAccount(id).then(res=>{
-                    console.log(res)
+                    // console.log(res)
                     if(res.data.code==0){
                         this.getList()
                         this.$message({type:'success',message:'删除成功',center: true})
@@ -118,12 +118,12 @@ module.exports = {
         handleSizeChange(val) {
             this.pages.size = val
             this.getList()          
-            console.log(`每页 ${val} 条`);
+            // console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
             this.pages.page = val
             this.getList()
-            console.log(`当前页: ${val}`);
+            // console.log(`当前页: ${val}`);
         },     
     },
 }

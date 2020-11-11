@@ -8,7 +8,6 @@ const http = axios.create({
 })
 //请求拦截器
 http.interceptors.request.use(config => {
-    // config.data = qs.stringify(config.data); //数据转化,也可以使用qs转换
     let token = window.sessionStorage.getItem("auth_token")
     if (token) {
       config.headers.userToken = token;  
@@ -22,7 +21,33 @@ http.interceptors.request.use(config => {
     Promise.reject(error)
   })
 
+/* -----------------上传封装------------------ */
+const upload = axios.create({
+    baseURL: process.env.BASE_API,
+    timeout: 3 * 1000
+})
+//请求拦截器
+upload.interceptors.request.use(config => {
+    let token = window.sessionStorage.getItem("auth_token")
+    if (token) {
+      config.headers.userToken = token;  
+      return config  
+    }
+    config.headers = {
+      'Content-Type': 'multipart/form-data' //配置请求头
+    }
+    return config
+  }, error => {
+    Promise.reject(error)
+  })
+
 export default {
+    /* ------------------上传------------------ */
+    uploadFile(file){
+      const formData = new FormData();
+      formData.append("file",file);
+      return upload.post('/api/a/m/common/upload',formData)
+    },
    /* ----------------动态导航----------------- */
     getNavList(){
       return http.get(`/api/a/m/common/nav/list`)
@@ -50,12 +75,12 @@ export default {
       return http.post(`/api/a/m/article`,qs.stringify(params))
     },
   //文章编辑
-    putArticleEdit(params){
-      return http.put(`/api/a/m/article`,qs.stringify(params))
+    patchArticleEdit(id,params){
+      return http.patch(`/api/a/m/article/${id}`,qs.stringify(params))
     },
   //上下架
-    articleStatus(params){
-      return http.put(`/api/a/m/article/status?${params}`)
+    articleStatus(id,params){
+      return http.put(`/api/a/m/article/${id}?`+params)
     },  
   //获取文章详情
     getArticleEdit(params){
@@ -76,12 +101,12 @@ export default {
       return http.post(`/api/a/m/video`,qs.stringify(params))
     },
   //视频编辑
-    putVideoEdit(params){
-      return http.put(`/api/a/m/video`,qs.stringify(params))
+    patchVideoEdit(id,params){
+      return http.patch(`/api/a/m/video/${id}`,qs.stringify(params))
     },
   //上下架
-    videoStatus(params){
-      return http.put(`/api/a/m/video/status?${params}`)
+    videoStatus(id,params){
+      return http.put(`/api/a/m/video/${id}?`+params)
     },  
   //获取视频详情
     getVideoEdit(params){
@@ -94,7 +119,7 @@ export default {
   /* ------------------公告管理------------------- */
   //公告列表
     postNoticeList(params){
-      return http.post(`/api/a/m/notice/list`,qs.stringify(params))
+      return http.post(`/api/a/m/notice/search`,qs.stringify(params))
     },
   //公告详情
     getNoticeEdit(params){
@@ -104,17 +129,9 @@ export default {
     postNoticeEdit(params){
       return http.post(`/api/a/m/notice`,qs.stringify(params))
     },
-  //公告编辑
-    putNoticeEdit(params){
-      return http.put(`/api/a/m/notice`,qs.stringify(params))
-    },
-  //公告删除
-    deleteNotice(params){
-      return http.delete(`/api/a/m/notice/${params}`)
-    },
   //上/下架
-    putNotice(params){
-      return http.put(`/api/a/m/notice/status?${params}`)
+    putNotice(params,status){
+      return http.put(`/api/a/m/notice/${params}?`+status)
     },
   /* -------------------树洞管理------------------- */
   //树洞列表

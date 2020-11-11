@@ -2,28 +2,18 @@
 module.exports = {
     data() {
         return {
+          token:sessionStorage.getItem('auth_token'),
           dialogFormVisible1: false,
           videoFlag: false,
-          ruleForm:this.verify.ruleForm4,
-          rules:this.verify.rules4,
-          rules2:this.verify.rules5,
-          dialogImageUrl: '',
           dialogVisible: false,
           hideUploadVideo: false,
-          limitCount:1,
-          fileLists: [],
+          ruleForm:this.cont.ruleForm4,
+          rules:this.cont.rules4,
           editorOption:this.cont.editor,
           userId:this.$route.query.id,
-
-          videoFlag: false,
-          //是否显示进度条
-          videoUploadPercent: "",
-          //进度条的进度，
-          isShowUploadVideo: false,
-          //显示上传按钮
-          videoForm: {
-              showVideoPath: ''
-          }
+          videoUploadPercent: 0,
+          dialogImageUrl: '',
+          fileLists: [],
         }
       },
       created() {
@@ -38,7 +28,7 @@ module.exports = {
         //获取文章
         async getEdit(id){
           const {data:res} = await this.$http.getVideoEdit(id)
-          console.log(res)
+          // console.log(res)
           this.ruleForm = res.data
           this.fileLists = [{url:res.data.videoImage}]
           this.hideUploadVideo = true 
@@ -46,106 +36,163 @@ module.exports = {
         //文章详情保存
         async submitForm(formName) {
           if(this.userId){
-            const {data:res} = await this.$http.putVideoEdit(this.ruleForm)
-            if(res.code==2000){
+            const {data:res} = await this.$http.patchVideoEdit(this.userId,this.ruleForm)
+            // console.log(res)
+            if(res.code==0){
               this.$router.push('/video')
             }
           }else{
             const {data:res} = await this.$http.postVideoEdit(this.ruleForm)
-            if(res.code==2000){
+            if(res.code==0){
               this.$router.push('/video')
             }
           }
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              this.$message.success({message:`保存成功！`,center: true})
+              return true
+            } else {
+              this.$message.warning({message:`内容填写不完整！`,center: true})
+              return false
+            }
+          });
         },
-        resetForm(formName) {
+        //取消
+        goBack(formName){
           this.$refs[formName].resetFields();
           this.$router.push('/video')
         },
-        //上传
-        uploadFile(){
-    
+        //重置
+        resetForm(formName) {
+          this.$refs[formName].resetFields();
+          this.fileLists = []
+          setTimeout(() => {
+            this.hideUploadVideo = false
+          }, 100);  
         },
-        //删除
+        /* --------------------头像or封面上传--------------------- */
+        async T_uploadFile(file){
+          const {data:res} = await this.$http.uploadFile(file.file)
+          if (res.code == 0) {
+            this.$message.success({message:`上传成功！`,center: true})
+            setTimeout(()=>{
+              this.ruleForm.teacherImage = res.data.url
+            },500) 
+          }else {
+            this.$message.error({message:`上传失败！`,center: true})
+          }
+        },
+        async V_uploadFile(file){
+          this. hideUploadVideo = true
+          const {data:res} = await this.$http.uploadFile(file.file)
+          if (res.code == 0) {
+            this.$message.success({message:`上传成功！`,center: true})
+            setTimeout(()=>{
+              this.ruleForm.videoImage = res.data.url
+            },500) 
+          }else {
+            this.$message.error({message:`上传失败！`,center: true})
+          }
+        },
+        beforeExcelUpload(file) {
+          if (file.size > 1024 * 1024 * 0.4) {
+            this.$message.error({ message: "图片大小不超过400KB!", center:'true'})
+            return false
+          }
+        },
         handleRemove(file, fileList) {
           setTimeout(()=>{
-          this.hideUploadVideo = fileList.length >= this.limitCount;
-        },100)  
-        this.fileLists = fileList;
-        this.ruleForm.videoImage='';
-        
+            this.hideUploadVideo = false;
+          },100)  
+          this.fileLists = fileList;
+          this.ruleForm.videoImage='';
         },
-        //获取文件名和文件大小
-        handlePreview(file, fileList) {
-          this.hideUploadVideo = fileList.length >= this.limitCount;
-          let that = this;
-        if (file.raw.size > 1024 * 1024 * 5) {
-          that.$message.error('上传文件大小不能超过 5MB!');
-          return;
-        }  
-        },
-        //限制文件个数
-        fileExceed:function(files, fileList){
-          this.$message.warning(`当前限制选择 1 个文件`)
-        },
-        //预览大图
         handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
+          this.dialogImageUrl = file.url;
+          this.dialogVisible = true;
         },
-        /* 上传头像 */
-        handleAvatarSuccess(res, file) {
-          this.ruleForm.imageUrl = URL.createObjectURL(file.raw);
-        },
-        beforeAvatarUpload(file) {
-          const isJPG = file.type === 'image/jpeg';
-          const isLt2M = file.size / 1024 / 1024 < 2;
-          if (!isJPG) {
-            this.$message.error('上传头像图片只能是 JPG 格式!');
-          }
-          if (!isLt2M) {
-            this.$message.error('上传头像图片大小不能超过 2MB!');
-          }
-          return isJPG && isLt2M;
-        },
-        
         /* ---------------------视频上传 ---------------------- */
-         //上传前回调
-         beforeUploadVideo(file) {
-          var fileSize = file.size / 1024 / 1024 < 300;
+        F_uploadFile(res,file){
+          if(res.code == 0){
+            this.ruleForm.videoUrl = res.data.url
+          }       
+        },
+        beforeUploadVideo(file) {
+          this.ruleForm.videoUrl = '' 
+          var fileSize = file.size / 1024 / 1024 < 200;
+          const videoSrc = window.URL.createObjectURL(file)
+          const video = document.createElement('video')
+          video.src = videoSrc
+          let that = this
           if (['video/mp4'].indexOf(file.type) == -1) {
-              layer.msg("请上传正确的视频格式");
+              this.$message.error("请上传正确的视频格式");
+              this.videoFlag = false
               return false;
+            
+          }else {
+            video.oncanplay = function() {
+              console.log(file)
+              if(this.videoWidth > 1080){
+                that.$message.error("分辨率不得超过1080p");
+                that.videoFlag = false
+                return false;
+              }
+              else if(file.size*8/1024/this.duration > 6000){
+                that.$message.error("视频码率不得超过6000kbps");
+                that.videoFlag = false
+                return false;
+              }
+              else if (!fileSize) {
+                that.$message.error("视频大小不能超过200MB");
+                that.videoFlag = false
+                return false;
+              }else {
+                that.videoFlag = true
+              }
+            }
           }
-          if (!fileSize) {
-              layer.msg("视频大小不能超过300MB");
-              return false;
-          }
-          this.isShowUploadVideo = false;
         },
-        //进度条
-        uploadVideoProcess(event, file, fileList) {
-          this.videoFlag = true;
-          this.videoUploadPercent = file.percentage.toFixed(0) * 1;
-        },
-        //上传成功回调
-        handleVideoSuccess(res, file) {
-          this.isShowUploadVideo = true;
-          this.videoFlag = false;
-          this.videoUploadPercent = 0;
-          
-          //前台上传地址
-          // if (file.status == 'success' ) {
-          //    this.ruleForm.videoUrl = file.url;
-          // } else {
-          //     layer.msg("上传失败，请重新上传");
-          // }
-
-          //后台上传地址
-          if (res.Code == 0) {
-              this.ruleForm.videoUrl = res.Data;
-          } else {
-              layer.msg(res.Message);
+        uploadchange (file,fileList) {
+          if (file.status === 'ready') {
+            this.videoUploadPercent = 0
+            const timer = setInterval(() => {
+              if (this.videoUploadPercent >= 35) {
+                clearInterval(timer)
+                return
+              }
+              this.videoUploadPercent += 1
+            }, 400)
+            const timer2 = setInterval(() => {
+              if (this.videoUploadPercent >= 75) {
+                clearInterval(timer2)
+                return
+              }
+              this.videoUploadPercent += 1
+            }, 800)
+            const timer3 = setInterval(() => {
+              if (this.videoUploadPercent >= 99) {
+                clearInterval(timer3)
+                return
+              }
+              this.videoUploadPercent += 1
+            }, 1200)
           }
-      }
+          if (file.status === 'success') {
+            this.videoUploadPercent = 100
+            setTimeout(() => {
+              this.videoFlag = false
+            }, 1500);
+          }
+        },
+        uploadEorror(){
+           this.$message.error("视频上传失败,请联系客服！");
+           this.hideUploadVideo = false
+           this.remove()
+        },
+        remove(){
+          this.$refs.uploader.abort()
+          this.videoFlag = false
+          this.ruleForm.videoUrl = ''
+        }
       }
     }

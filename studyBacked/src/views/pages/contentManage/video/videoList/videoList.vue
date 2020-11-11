@@ -10,7 +10,7 @@
         </el-select>
       </label>
       <label>点 赞:
-        <el-input v-model="input2.likeStart" style="width: 150px;" @change="load.inputEnd()"></el-input> ~ <el-input v-model="input2.likeEnd" style="width: 150px;" @change="load.inputEnd()"></el-input>
+        <el-input v-model="input2.greatStart" type="number" style="width: 150px;" @change="load.inputEnd()"></el-input> ~ <el-input v-model="input2.greatEnd" type="number" style="width: 150px;" @change="load.inputEnd()"></el-input>
       </label>
 
     </div>
@@ -24,7 +24,7 @@
       <label>老 师: <el-input v-model="input2.teacherName" style="width: 200px;"></el-input>
       </label>
       <label>收 藏:
-        <el-input v-model="input2.favouriteStart" style="width: 150px;" @change="load.inputEnd()"></el-input> ~ <el-input v-model="input2.favouriteEnd" style="width: 150px;" @change="load.inputEnd()"></el-input>
+        <el-input v-model="input2.favouriteStart" type="number" style="width: 150px;" @change="load.inputEnd()"></el-input> ~ <el-input v-model="input2.favouriteEnd" type="number" style="width: 150px;" @change="load.inputEnd()"></el-input>
       </label>
 
     </div>
@@ -43,7 +43,7 @@
       </label>
       <div class="menu-but">
         <el-button size="mini" plain @click="reset()">重置</el-button>
-        <el-button size="mini" plain icon="el-icon-search" @click="getSearch()">查找</el-button>
+        <el-button size="mini" style="margin-right: -15px;" plain icon="el-icon-search" @click="getSearch()">查找</el-button>
       </div>
     </div>
   </div>
@@ -67,9 +67,16 @@
           <div v-else>--</div>
         </template>
       </el-table-column>
-      <el-table-column label="作者" align="center">
+      <el-table-column label="老师" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <div v-if="scope.row.teacherName">
+            <el-popover v-if="scope.row.teacherName.length > 5" placement="top" trigger="hover">
+              <span>{{scope.row.teacherName}}</span>
+              <span slot="reference" style="curosr:pointer">{{scope.row.teacherName.slice(0,5)+"..."}}</span>
+            </el-popover>
+            <div v-else>{{scope.row.teacherName}}</div>
+          </div>
+          <div v-else>--</div>
         </template>
       </el-table-column>
       <el-table-column label="分类" align="center" width="90">
@@ -87,18 +94,6 @@
           <span>{{ scope.row.subject |status4 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="老师" align="center">
-        <template slot-scope="scope">
-          <div v-if="scope.row.teacherName">
-            <el-popover v-if="scope.row.teacherName.length > 5" placement="top" trigger="hover">
-              <span>{{scope.row.teacherName}}</span>
-              <span slot="reference" style="curosr:pointer">{{scope.row.teacherName.slice(0,5)+"..."}}</span>
-            </el-popover>
-            <div v-else>{{scope.row.teacherName}}</div>
-          </div>
-          <div v-else>--</div>
-        </template>
-      </el-table-column>
       <el-table-column label="收藏" width="80" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.favourite }}</span>
@@ -106,7 +101,7 @@
       </el-table-column>
       <el-table-column label="点赞" width="80" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.like }}</span>
+          <span>{{ scope.row.great }}</span>
         </template>
       </el-table-column>
       <el-table-column label="时间" width="100" align="center">
@@ -123,8 +118,8 @@
         <template slot-scope="scope">
           <el-button size="mini" style="margin-left:10px;" type="text" @click="handleIncrease(scope.row.id)">查看</el-button>
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleEdit(scope.row.id)">编辑</el-button>
-          <el-button size="mini" type="text" @click="handleStatus(scope.row.id,scope.row.status)">{{scope.row.status==1?'下架':'上架'}}</el-button>
-          <el-button type="text" size="mini" icon="el-icon-delete" @click="handleDelete(scope.row.id)">删除</el-button>
+          <el-button size="mini" :style="scope.row.status==1?'color:red':''" type="text" @click="handleStatus(scope.row.id,scope.row.status)">{{scope.row.status==1?'下架':'上架'}}</el-button>
+          <el-button type="text" style="color:red" size="mini" icon="el-icon-delete" @click="handleDelete(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

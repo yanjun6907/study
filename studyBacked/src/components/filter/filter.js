@@ -1,29 +1,29 @@
 import moment from 'moment'//时间戳格式化
    const filters = {
-      times:function(dateStr,pattern='YYYY-MM-DD HH:mm:ss'){
+      times:function(dateStr,pattern='YYYY-MM-DD'){
          return moment(dateStr).format(pattern);
       },
       status: function(val) {
-         if(val==1){
+         if(val==0){
             return '正常'
          }
-         else if(val==0) {
+         else if(val==1) {
             return '冻结'
          }       
       },
       status2: function(val) {
          if(val==1){
             return '上架'
-         }
-         else if(val==0){
+         }else if(val==0) {
             return '下架'
          }
+         
       },
       status3: function(val) {
-         if(val==0){
+         if(val==1){
             return 'banner文章'
          }
-         else if(val==1){
+         else if(val==0){
             return 'card文章'
          } 
       },
