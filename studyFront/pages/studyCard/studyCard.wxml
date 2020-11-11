@@ -1,16 +1,16 @@
 <view class="top">
-  <view class="goInfo">编辑</view>
+  <view class="goInfo" bindtap='putStudyCard'>编辑</view>
   <view class="titleInfo">
-      <view class="titleImage"></view>
+      <view class="titleImage" style="background:url({{head}}) no-repeat;background-size: 100% 100%;"></view>
       <view class="user">
         <text class="userName">昵　称：{{userName}}</text>
-        <text class="userName">年　级：{{grade}}</text>
+        <text class="userName">年　级：{{filter.getGrade(grade)}}</text>
         <text class="beans">逆袭豆：{{bean}}</text>
       </view>
     </view>
 </view>
 <view class="main">
-  <view class="phone">
+  <view class="phone" bindtap="goCollect">
     <view>
     <mp-icon icon="pencil" color="#00aeff" size="{{25}}"></mp-icon>
     我的收藏
@@ -24,7 +24,7 @@
     </view>
     <mp-icon icon="arrow" color="#00aeff" size="{{15}}"></mp-icon>
   </view>
-  <view class="phone">
+  <view class="phone" bindtap="goChangePhone">
     <view>
     <mp-icon icon="link" color="#00aeff" size="{{25}}"></mp-icon>
     账号与绑定
@@ -33,3 +33,6 @@
   </view> 
 </view>
 <button class="btn">退出登录</button>
+<wxs module='filter' src='../../filter/filter.wxs'></wxs>
+
+

@@ -2,15 +2,15 @@
   <image class="image" src="../../images/back.png"></image>
   <view class="main">
     <view class="mainTop">
-    <view class="titleInfo">
-      <view class="titleImage"></view>
+    <view class="titleInfo" bindtap="goStudyCard">
+      <image src="{{head}}" class="titleImage"></image>
       <view class="user">
         <text class="userName">{{userName}}</text>
         <text class="beans">逆袭豆：{{bean}}</text>
       </view>
     </view>
     <view class="titleRight">
-      <view class="Announcement" type="default" bindtap="tapOneDialogButton">
+      <view class="Announcement" type="default" bindtap="noticeDialogButton">
          <view class="cement">
            <image class="image3" src="../../images/u3.png"></image>
            公告
@@ -30,14 +30,11 @@
     <button type="primary">文学部</button>
     <button type="primary">影像部</button>
     <button type="primary">留言板</button>
-    <button type="primary">树洞</button>
+    <button type="primary" bindtap="goTreeHole">树洞</button>
   </view>
 </view>
-  <mp-dialog title="V4.0版本更新提示" show="{{showOneButtonDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
-      <view class="text">新版本特性：</view>
-      <view class="text">1.参与大作战有机会以优惠的价格购买会员月卡</view>
-      <view class="text">2.课程评论后分享打卡</view> 
-      <view class="text">3.课程播放详情页改版</view>
+  <mp-dialog title="{{title}}" show="{{showOneButtonDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+      <view class="text">{{content}}</view>
   </mp-dialog>
   <mp-dialog title="绑定手机" show="{{dialogShow}}" bindbuttontap="tapDialogButton2" buttons="{{buttons}}">
     <view class="textCont">使用互联网服务需进行身份信息验证，为保障您的使用体验，请授权您的手机号</view>

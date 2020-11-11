@@ -20,11 +20,10 @@ Page({
         })
     },
     async getlist(){       
-        let pages = {page:1,size:9999}
-        const res = await request({url:'/a/u/hole/list',method:'POST',data:pages}) 
+        const res = await request({url:'/a/u/hole/list',method:'POST'}) 
         console.log(res.data)  
         this.setData({
-            cardInfoList:res.data.data.list,
+            cardInfoList:res.data.data,
             hot:false
         })
     },

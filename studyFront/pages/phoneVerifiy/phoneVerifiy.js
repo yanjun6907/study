@@ -1,9 +1,12 @@
-
+import {request} from '../../request/index.js'
+const regeneratorRuntime = require('../../lib/runtime.js')
 Page({
-
   data: {
     id:'',
-    phone:'',
+    iphone:'',
+    email:'',
+    captcha:'',
+    ok:'',
     formData: {},
     smsFlag: -1,
     sendTime: '获取验证码',
@@ -38,7 +41,20 @@ Page({
       }]
   },
   // 获取验证码
-  sendCode: function() { 
+  async sendCode() { 
+    if(this.data.id==0){
+      let phones = `contact=${this.data.iphone}`
+      const res = await request({url:'/a/u/phone/captcha',method:'POST',data:phones,header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }})
+      console.log(res)
+    } else if(this.data.id==1) {
+      let emails = `contact=${this.data.email}`
+      const res = await request({url:'/a/u/email/captcha',method:'POST',data:emails,header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }})
+      console.log(res)
+    }
   // 60秒后重新获取验证码
     let that =this
      var inter = setInterval(function() {
@@ -60,10 +76,25 @@ Page({
        }
      }.bind(this), 1000);
    },
-  formInputChange(e) {
+  formInputChange1(e) {
     const {field} = e.currentTarget.dataset
       this.setData({
         [`formData.${field}`]: e.detail.value,
+        captcha:e.detail.value,
+    })  
+  },
+  formInputChange2(e) {
+    const {field} = e.currentTarget.dataset
+      this.setData({
+        [`formData.${field}`]: e.detail.value,
+        iphone:e.detail.value,
+    })  
+  },
+  formInputChange3(e) {
+    const {field} = e.currentTarget.dataset
+      this.setData({
+        [`formData.${field}`]: e.detail.value,
+        email:e.detail.value,
     })  
   },
   submitForm() {
@@ -86,13 +117,22 @@ Page({
         }
     })
   },
+  submitPhone(){
+    let phones = `captcha=${this.data.captcha}&contact=${this.data.iphone}`
+    request({url:`/a/u/phone/bind`,method:'POST',data:phones,header: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }}).then(res=>{
+      console.log(res)
+    })
+  },
   submitForm1() {
+    let that = this
     this.selectComponent('#form1').validate((valid, errors) => {
         console.log('valid', valid, errors)
         if (!valid) {
             const firstError = Object.keys(errors)
             if (firstError.length) {
-                this.setData({
+              that.setData({
                     error: errors[firstError[0]].message
                 })
             }
@@ -100,6 +140,9 @@ Page({
             wx.showToast({
                 title: '校验通过'
             })
+            that.setData({
+              ok: 0
+          })
         }
     })
   },
@@ -123,6 +166,14 @@ Page({
         }
     })
   },
+  submitEmail(){
+    let emails = `captcha=${this.data.captcha}&contact=${this.data.email}`
+    request({url:`/a/u/email/bind`,method:'POST',data:emails,header: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }}).then(res=>{
+      console.log(res)
+    })
+  },
   submitForm3() {
     this.selectComponent('#form3').validate((valid, errors) => {
         console.log('valid', valid, errors)
@@ -137,6 +188,9 @@ Page({
             wx.showToast({
                 title: '校验通过'
             })
+            that.setData({
+              ok: 1
+          })
         }
     })
   },

@@ -21,7 +21,9 @@ async saveArticle(){
   let content = `content=${this.data.content}`
   console.log(this.data.content)
   if(this.data.content!=''){
-    const res = await request({url:'/a/u/hole',method:'POST',data:content})
+    const res = await request({url:'/a/u/hole',method:'POST',data:content, header: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },})
     console.log(res)
     this.goBack()
   }else {

@@ -3,12 +3,12 @@
       <view class="user">
         头像:
       </view>
-      <view class="titleImage" bindtap="open"></view>
+      <view class="titleImage" style="background:url({{head}}) no-repeat;background-size: 100% 100%;" bindtap="open"></view>
     </view>
 <view class="main">
   <view class="phone">
     昵称:
-    <view>
+    <view bindtap='goCheckName'>
       <text style="font-size: 25rpx;color:#a3a3a3;margin-right: 15rpx;">{{userName}}</text>
       <mp-icon icon="arrow" color="#a3a3a3" size="{{15}}"></mp-icon>
     </view>

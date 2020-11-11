@@ -68,7 +68,7 @@
     border: 1px solid #c7c7c7;
   }
   .text-gray {
-    color: #ffffff;
+    color: #fff;
   }
   .text-red {
     background-color: #F87474;

@@ -27,6 +27,15 @@ Page({
     })
   },
   onLoad: function (options) {
-
+    let that = this
+    wx.getStorage({
+      key: 'phone',
+      success(res){
+        that.setData({
+          Phone:res.data.phone,
+          Email:res.data.email
+        })
+      }
+    })
   },
 })

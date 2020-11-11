@@ -1,4 +1,5 @@
-
+import {request} from '../../request/index.js'
+const regeneratorRuntime = require('../../lib/runtime.js')
 Page({
   data: {
     total:15,
@@ -15,11 +16,11 @@ Page({
     // 日期list 
     calendarDays: []
   },
-  onLoad: function (options) {
+  onLoad(options) {
     this.getMonthDaysCurrent(new Date())
   },
     // 所选时间对应月份日期
-    getMonthDaysCurrent(e) {
+    async getMonthDaysCurrent(e) {
       let year = e.getFullYear()
       let month = e.getMonth() + 1
       let date = e.getDate()
@@ -29,73 +30,93 @@ Page({
       let firstDay = firstDayDate.getDay() //当月1号对应的星期
       let lastDate = new Date(year, month - 1, days) //当月最后一天日期
       let lastDay = lastDate.getDay() //当月最后一天对应的星期
+      const res = await request({url:'/a/u/signs',method:'GET'})
+      console.log(res.data)
       // 更新顶部显示日期
       this.setData({
-        calendarTitle: year + "年" + (month > 9 ? month : "0" + month) + "月" + (date > 9 ? date : "0" + date)+ "日"
+        calendarTitle: year + "年" + (month > 9 ? month : "0" + month) + "月" + (date > 9 ? date : "0" + date)+ "日",
+        total:res.data.data[0].coutSign,
+        sginDay:res.data.data[0].mostSign,
       })
-      let calendarDays = []
-      // 上个月显示的天数及日期
+    
+      let firstCalendarDays = []
+      let calendarDay = []
+      // // 上个月显示的天数及日期
       for (let i = firstDay - 1; i >= 0; i--) {
         let date = new Date(year, month - 1, -i)
         //console.log(date, date.getMonth() + 1)
-        calendarDays.push({
+        firstCalendarDays.push({
           'year': date.getFullYear(),
           'month': date.getMonth() + 1,
           'date': date.getDate(),
           'day': date.getDay(),
           'current': false,
-          'selected': false
+          'selected': 0
         })
       }
       // 当月显示的日期
       for (let i = 1; i <= days; i++) {
-        calendarDays.push({
-          'year': year,
-          'month': month,
-          'date': i,
-          'day': new Date(year, month - 1, i).getDay(),
-          'current': true,
-          'selected': i == date // 判断当前日期
-        })
-      }
-      // 下个月显示的天数及日期
+            calendarDay.push({
+              'year': year,
+              'month': month,
+              'date': i,
+              'day': new Date(year, month - 1, i).getDay(),
+              'current': true,
+              'selected':0
+            }) 
+      } 
+      // // 下个月显示的天数及日期
       for (let i = 1; i < 7 - lastDay; i++) {
         let date = new Date(year, month, i)
         //console.log(date, date.getMonth() + 1)
-        calendarDays.push({
+        calendarDay.push({
           'year': date.getFullYear(),
           'month': date.getMonth() + 1,
           'date': date.getDate(),
           'day': date.getDay(),
           'current': false,
-          'selected': false
+          'selected': 0
         })
       }
+      for (let i = 1; i <= days; i++) {
+        for (let j = 0; j < res.data.data.length; j++) {
+          if(res.data.data[j].createTime ==year +""+ (month > 9 ? month : "0" + month) +""+ (i > 9 ? i : "0" + i)){
+            calendarDay[i-1].selected = 1
+          }
+        }
+      }
+      if(calendarDay[date-1].selected == 1){  
+        this.setData({
+          checked:true
+        })
+      }
+      let calen = firstCalendarDays.concat(calendarDay)
       this.setData({
-        calendarDays: calendarDays
+        calendarDays:calen
       })
     },
-    sginInfo(){
-      wx.showToast({
-        title: `签到成功\r\n逆袭豆+5`,
-        icon:'none',
-        duration: 3000
-      })
-      this.setData({
-        checked:true
-      })
+    async sginInfo(){
+      let that = this
+      const res = await request({url:'/a/u/signs',method:'POST'})
+      console.log(res.data)
+      if(res.data.code==1102){
+        wx.showToast({
+          title: `签到成功\r\n逆袭豆+5`,
+          icon:'none',
+          duration: 3000
+        })
+        this.setData({
+          checked:true
+        })
+        wx.setStorage({
+          key: 'checked',
+          data: that.data.checked==true,
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 1,
+          })
+        }, 3000);
+      } 
     },
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
 })

@@ -3,7 +3,7 @@ const regeneratorRuntime = require('../../lib/runtime.js')
 Page({
   data: {
     show: false,
-    userName:'爱学习的张三',
+    userName:'迷途的小鹿',
     msg:false,
     userInfo:{
       code:'',

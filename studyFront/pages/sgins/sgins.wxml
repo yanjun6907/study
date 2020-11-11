@@ -13,7 +13,7 @@
             <view class='display-space-between2'>
               <view>{{calendarTitle}}</view>
             </view> 
-            <view class='calendar-item {{item.current ? "":"text-gray"}} {{item.selected ? "text-red":""}}' wx:for-items="{{calendarDays}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index='{{index}}' bindtap='clickDate'>{{item.date}}</view> 
+            <view class='calendar-item {{item.current ? "":"text-gray"}} {{item.selected==1? "text-red":""}}' wx:for-items="{{calendarDays}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index='{{index}}'>{{item.date}}</view> 
         </view>
         <view class="btn">
           <button class='{{checked==false?"green":""}}' bindtap="sginInfo" disabled="{{checked==true}}">{{checked==false?'签到':'已签到'}}</button>
