@@ -51,5 +51,4 @@ Page({
   onLoad(){
     this.getList()
   }
-
 })

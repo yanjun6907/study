@@ -44,6 +44,9 @@ Page({
           wx.showToast({
             title: '校验通过'
           })
+          wx.navigateTo({
+            url: '../phoneVerifiy/phoneVerifiy?id=0',
+          })
         }else if(res.data.code==2106){
           wx.showToast({
             title: res.data.message,
@@ -53,10 +56,6 @@ Page({
           wx.showToast({
             title: res.data.message,
             icon:'none'
-          })
-        }else {
-          wx.navigateTo({
-            url: '../phoneVerifiy/phoneVerifiy?id=0',
           })
         }
       })
@@ -70,6 +69,9 @@ Page({
           wx.showToast({
             title: '校验通过'
           })
+          wx.navigateTo({
+            url: '../phoneVerifiy/phoneVerifiy?id=1',
+          })
         }else if(res.data.code==2106){
           wx.showToast({
             title: res.data.message,
@@ -79,10 +81,6 @@ Page({
           wx.showToast({
             title: res.data.message,
             icon:'none'
-          })
-        }else {
-          wx.navigateTo({
-            url: '../phoneVerifiy/phoneVerifiy?id=1',
           })
         }
       })

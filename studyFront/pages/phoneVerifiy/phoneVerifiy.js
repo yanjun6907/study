@@ -123,6 +123,11 @@ Page({
       "Content-Type": "application/x-www-form-urlencoded"
     }}).then(res=>{
       console.log(res)
+      if(res.data.code==0){
+        wx.navigateTo({
+          url: '../studyCard/studyCard',
+        })
+      }
     })
   },
   submitForm1() {
@@ -172,6 +177,11 @@ Page({
       "Content-Type": "application/x-www-form-urlencoded"
     }}).then(res=>{
       console.log(res)
+      if(res.data.code==0){
+        wx.navigateTo({
+          url: '../studyCard/studyCard',
+        })
+      }
     })
   },
   submitForm3() {

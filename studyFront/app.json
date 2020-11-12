@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/homePage/hpmePage",
+    "pages/treeHole/treeHole",
     "pages/myCollection/myCollection",
     "pages/phoneBind/phoneBind",
     "pages/phoneChange/phoneChange",
@@ -9,7 +10,6 @@
     "pages/studyEdit/studyEdit",
     "pages/studyName/studyName",
     "pages/sgins/sgins",
-    "pages/treeHole/treeHole",
     "pages/treeArticle/treeArticle",
     "pages/login/login",
     "pages/changeName/changeName"

@@ -65,6 +65,10 @@ page {
   justify-content: space-between;
 }
 .Like-ico {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100rpx;
   height: 140rpx; 
   overflow: hidden;
   
@@ -76,8 +80,4 @@ page {
   color: #0077ff;
   background-color: #fff;
   border: 1rpx solid #cfcfcf;
-}
-.text {
-  text-align: center;
-  height: 50rpx;
 }

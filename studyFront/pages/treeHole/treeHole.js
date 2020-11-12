@@ -2,6 +2,8 @@ import {request} from '../../request/index.js'
 const regeneratorRuntime = require('../../lib/runtime.js')
 Page({
     data: {
+        status:0,
+        status2:0,
         nowPgae:1,
         startX:0,
         slider:false,
@@ -26,6 +28,38 @@ Page({
             cardInfoList:res.data.data,
             hot:false
         })
+    },
+    async addLike(id){
+        let mid = id.currentTarget.dataset.id
+        let status = `holeLike=${this.data.status==0?1:0}`
+        const res = await request({url:`/a/u/hole/like/${mid}`,method:'PUT',data:status,header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }})
+        if(res.data.code==1207){
+            this.setData({
+                status:1
+            })
+        }else if(res.data.code==1208){
+            this.setData({
+                status:0
+            })
+        }
+    },
+    async addDislike(id){   
+        let mid = id.currentTarget.dataset.id
+        let status = `holeDislike=${this.data.status2==0?1:0}`
+        const res = await request({url:`/a/u/hole/dislike/${mid}`,method:'PUT',data:status,header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }})
+        if(res.data.code==1209){
+            this.setData({
+                status2:1
+            })
+        }else if(res.data.code==1210){
+            this.setData({
+                status2:0
+            })
+        }
     },
     articleTree(){
         wx.navigateTo({
